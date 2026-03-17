@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MisThy's Vườn Mít Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #FFE2E1;
+            min-height: 100vh;
+            color: #4a0e2e;
+            position: relative;
+        }
+
+        /* Faded Background Logo */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            max-width: 600px;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+            filter: grayscale(10%) brightness(0.9);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4d6d, #c9184a, #ff758d);
+            border-radius: 2px;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a, #8c1c3f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #8c1c3f;
+            font-weight: 600;
+        }
+
+        .header-logo {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+            vertical-align: middle;
+            margin-right: 12px;
+            border-radius: 50%;
+            border: 2px solid #ff4d6d;
+            background: #fff;
+            padding: 2px;
+        }
+
+        /* Decorative elements */
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 77, 109, 0.6);
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Groups container */
+        .groups-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Group card */
+        .group-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 77, 109, 0.2);
+            border-radius: 24px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(140, 28, 63, 0.05);
+            margin-bottom: 10px;
+        }
+
+        .group-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4d6d, #c9184a, #ff8fa3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .group-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 77, 109, 0.4);
+            box-shadow: 0 20px 40px rgba(140, 28, 63, 0.12);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .group-card:hover::before {
+            opacity: 1;
+        }
+
+        .group-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #c9184a, #ff4d6d);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .group-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #4a0e2e;
+        }
+
+        .group-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+            padding: 10px 22px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.2);
+        }
+
+        .group-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3);
+            background: linear-gradient(135deg, #ff758d, #ff4d6d);
+        }
+
+        .group-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .qr-wrapper {
+            background: #fff;
+            border-radius: 14px;
+            padding: 12px;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            border: 1px solid #fce4ec;
+        }
+
+        .qr-wrapper img {
+            display: block;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px 40px;
+            color: #8c1c3f;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .footer span {
+            color: #ff4d6d;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .groups-container {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .qr-wrapper img {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Faded Background Logo -->
+    <img src="logo-fc.png" class="bg-logo" alt="logo FC" onerror="this.style.display='none'">
+
+    <!-- Decorative sparkles -->
+    <div class="sparkle" style="top: 10%; left: 15%;"></div>
+    <div class="sparkle" style="top: 25%; right: 20%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 60%; left: 10%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 80%; right: 15%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="top: 45%; right: 8%; animation-delay: 2s;"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1><img src="misty-logo.png" class="header-logo" alt="logo"> MisThy's Vườn Mít Group</h1>
+        <p>Các Group nhỏ tại các tỉnh — Kiểm soát số lượng gửi quà</p>
+    </header>
+
+    <!-- Groups -->
+    <div class="groups-container">
+
+        <!-- Group 1 -->
+        <div class="group-card">
+            <div class="group-number">1</div>
+            <div class="group-name">Hồ Chí Minh</div>
+            <a href="https://zalo.me/g/erncbvfgim0vvojxvsz4" target="_blank" class="group-link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                Tham gia Nhóm Zalo
+            </a>
+            <div class="qr-wrapper">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/erncbvfgim0vvojxvsz4&color=302b63" alt="QR HCM Zalo">
+            </div>
+        </div>
+
+        <!-- Group 2 -->
+        <div class="group-card">
+            <div class="group-number">2</div>
+            <div class="group-name">Hà Nội</div>
+            <a href="https://zalo.me/g/wha57qhflnb2qbu7hoj7" target="_blank" class="group-link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                Tham gia Nhóm Zalo
+            </a>
+            <div class="qr-wrapper">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/wha57qhflnb2qbu7hoj7&color=302b63" alt="QR Hà Nội Zalo">
+            </div>
+        </div>
+
+        <!-- Group 3 -->
+        <div class="group-card">
+            <div class="group-number">3</div>
+            <div class="group-name">Đà Nẵng</div>
+            <a href="https://zalo.me/g/d7luwcrl4do8sx7geuro" target="_blank" class="group-link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                Tham gia Nhóm Zalo
+            </a>
+            <div class="qr-wrapper">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/d7luwcrl4do8sx7geuro&color=302b63" alt="QR Đà Nẵng Zalo">
+            </div>
+        </div>
+
+        <!-- Group 4 -->
+        <div class="group-card">
+            <div class="group-number">4</div>
+            <div class="group-name">Cần Thơ</div>
+            <a href="https://zalo.me/g/z8xtrcse22men1cnhyey" target="_blank" class="group-link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                Tham gia Nhóm Zalo
+            </a>
+            <div class="qr-wrapper">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/z8xtrcse22men1cnhyey&color=302b63" alt="QR Cần Thơ Zalo">
+            </div>
+        </div>
+
+        <!-- Group 5 -->
+        <div class="group-card">
+            <div class="group-number">5</div>
+            <div class="group-name">Hải Phòng</div>
+            <a href="https://facebook.com/groups/example5" target="_blank" class="group-link">
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                Tham gia Group
+            </a>
+            <div class="qr-wrapper">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://facebook.com/groups/example5&color=302b63" alt="QR Hải Phòng">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        Made with <span>♥</span> for MisThy's Vườn Mít
+    </footer>
+
+</body>
+</html>
