@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,8 +95,17 @@
         }
 
         @keyframes sparkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
         }
 
         /* Groups container */
@@ -229,6 +239,51 @@
             color: #ff4d6d;
         }
 
+        /* Sub-group selector styles */
+        .sub-group-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .sub-btn {
+            background: rgba(255, 77, 109, 0.1);
+            border: 1px solid rgba(255, 77, 109, 0.2);
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #8c1c3f;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sub-btn.active {
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+        }
+
+        .sub-content {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .sub-content.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .header h1 {
@@ -247,6 +302,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Faded Background Logo -->
@@ -262,83 +318,229 @@
     <!-- Header -->
     <header class="header">
         <h1><img src="misty-logo.png" class="header-logo" alt="logo"> MisThy's Vườn Mít Group</h1>
-        <p>Các Group nhỏ tại các tỉnh — Kiểm soát số lượng gửi quà</p>
+        <p>Danh sách cái group tại các thành phố cho các bạn giao lưu rủ rê và phát quà</p>
     </header>
 
     <!-- Groups -->
     <div class="groups-container">
 
-        <!-- Group 1 -->
+        <!-- Group 1 (Miền Bắc) -->
         <div class="group-card">
             <div class="group-number">1</div>
-            <div class="group-name">Hồ Chí Minh</div>
-            <a href="https://zalo.me/g/erncbvfgim0vvojxvsz4" target="_blank" class="group-link">
-                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Tham gia Nhóm Zalo
-            </a>
-            <div class="qr-wrapper">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/erncbvfgim0vvojxvsz4&color=302b63" alt="QR HCM Zalo">
+            <div class="group-name">Miền Bắc</div>
+            
+            <div class="sub-group-selector">
+                <button class="sub-btn active" onclick="switchSubGroup('ha-noi', this)">Hà Nội</button>
+                <button class="sub-btn" onclick="switchSubGroup('ha-long', this)">Hạ Long</button>
+                <button class="sub-btn" onclick="switchSubGroup('hai-phong', this)">Hải Phòng</button>
+            </div>
+
+            <!-- Hà Nội Content -->
+            <div id="ha-noi" class="sub-content active">
+                <a href="https://zalo.me/g/wha57qhflnb2qbu7hoj7" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/wha57qhflnb2qbu7hoj7&color=302b63"
+                        alt="QR Hà Nội Zalo">
+                </div>
+            </div>
+
+            <!-- Hạ Long Content -->
+            <div id="ha-long" class="sub-content">
+                <a href="https://zalo.me/g/dken7biu4ctsoxr2vaxa" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/dken7biu4ctsoxr2vaxa&color=302b63"
+                        alt="QR Hạ Long Zalo">
+                </div>
+            </div>
+
+            <!-- Hải Phòng Content -->
+            <div id="hai-phong" class="sub-content">
+                <a href="https://zalo.me/g/d3ganeuxmv9xrh7vvgjq" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/d3ganeuxmv9xrh7vvgjq&color=302b63"
+                        alt="QR Hải Phòng Zalo">
+                </div>
             </div>
         </div>
 
-        <!-- Group 2 -->
+        <!-- Group 2 (Miền Trung) -->
         <div class="group-card">
             <div class="group-number">2</div>
-            <div class="group-name">Hà Nội</div>
-            <a href="https://zalo.me/g/wha57qhflnb2qbu7hoj7" target="_blank" class="group-link">
-                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Tham gia Nhóm Zalo
-            </a>
-            <div class="qr-wrapper">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/wha57qhflnb2qbu7hoj7&color=302b63" alt="QR Hà Nội Zalo">
+            <div class="group-name">Miền Trung</div>
+            
+            <div class="sub-group-selector">
+                <button class="sub-btn active" onclick="switchSubGroup('da-nang', this)">Đà Nẵng</button>
+            </div>
+
+            <!-- Đà Nẵng Content -->
+            <div id="da-nang" class="sub-content active">
+                <a href="https://zalo.me/g/d7luwcrl4do8sx7geuro" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/d7luwcrl4do8sx7geuro&color=302b63"
+                        alt="QR Đà Nẵng Zalo">
+                </div>
             </div>
         </div>
 
-        <!-- Group 3 -->
+        <!-- Group 3 (Miền Nam) -->
         <div class="group-card">
             <div class="group-number">3</div>
-            <div class="group-name">Đà Nẵng</div>
-            <a href="https://zalo.me/g/d7luwcrl4do8sx7geuro" target="_blank" class="group-link">
-                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Tham gia Nhóm Zalo
-            </a>
-            <div class="qr-wrapper">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/d7luwcrl4do8sx7geuro&color=302b63" alt="QR Đà Nẵng Zalo">
+            <div class="group-name">Miền Nam</div>
+            
+            <div class="sub-group-selector">
+                <button class="sub-btn active" onclick="switchSubGroup('hcm', this)">Hồ Chí Minh</button>
+                <button class="sub-btn" onclick="switchSubGroup('tay-ninh', this)">Tây Ninh</button>
+            </div>
+
+            <!-- HCM Content -->
+            <div id="hcm" class="sub-content active">
+                <a href="https://zalo.me/g/erncbvfgim0vvojxvsz4" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/erncbvfgim0vvojxvsz4&color=302b63"
+                        alt="QR HCM Zalo">
+                </div>
+            </div>
+
+            <!-- Tây Ninh Content -->
+            <div id="tay-ninh" class="sub-content">
+                <a href="https://zalo.me/g/gwl8wdwcogfwk6utksl9" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/gwl8wdwcogfwk6utksl9&color=302b63"
+                        alt="QR Tây Ninh Zalo">
+                </div>
             </div>
         </div>
 
-        <!-- Group 4 -->
+        <!-- Group 4 (Miền Tây) -->
         <div class="group-card">
             <div class="group-number">4</div>
-            <div class="group-name">Cần Thơ</div>
-            <a href="https://zalo.me/g/z8xtrcse22men1cnhyey" target="_blank" class="group-link">
-                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Tham gia Nhóm Zalo
-            </a>
-            <div class="qr-wrapper">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/z8xtrcse22men1cnhyey&color=302b63" alt="QR Cần Thơ Zalo">
+            <div class="group-name">Miền Tây</div>
+            
+            <div class="sub-group-selector">
+                <button class="sub-btn active" onclick="switchSubGroup('can-tho', this)">Cần Thơ</button>
+                <button class="sub-btn" onclick="switchSubGroup('an-giang', this)">An Giang</button>
+                <button class="sub-btn" onclick="switchSubGroup('long-an', this)">Long An</button>
+                <button class="sub-btn" onclick="switchSubGroup('tien-giang', this)">Mỹ Tho - Tiền Giang</button>
+            </div>
+
+            <!-- Cần Thơ Content -->
+            <div id="can-tho" class="sub-content active">
+                <a href="https://zalo.me/g/z8xtrcse22men1cnhyey" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/z8xtrcse22men1cnhyey&color=302b63"
+                        alt="QR Cần Thơ Zalo">
+                </div>
+            </div>
+
+            <!-- Mỹ Tho Content -->
+            <div id="tien-giang" class="sub-content">
+                <a href="https://zalo.me/g/jaz2vqtv5qwrlgu0xuce" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/jaz2vqtv5qwrlgu0xuce&color=302b63"
+                        alt="QR Mỹ Tho - Tiền Giang Zalo">
+                </div>
+            </div>
+
+            <!-- An Giang Content -->
+            <div id="an-giang" class="sub-content">
+                <a href="https://zalo.me/g/zmiaolvgsltctwl9g7cl" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/zmiaolvgsltctwl9g7cl&color=302b63"
+                        alt="QR An Giang Zalo">
+                </div>
+            </div>
+
+            <!-- Long An Content -->
+            <div id="long-an" class="sub-content">
+                <a href="https://zalo.me/g/hxucnirpuhznqe4by6y3" target="_blank" class="group-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                    Tham gia Nhóm Zalo
+                </a>
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/hxucnirpuhznqe4by6y3&color=302b63"
+                        alt="QR Long An Zalo">
+                </div>
             </div>
         </div>
 
-        <!-- Group 5 -->
-        <div class="group-card">
-            <div class="group-number">5</div>
-            <div class="group-name">Hải Phòng</div>
-            <a href="https://facebook.com/groups/example5" target="_blank" class="group-link">
-                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                Tham gia Group
-            </a>
-            <div class="qr-wrapper">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://facebook.com/groups/example5&color=302b63" alt="QR Hải Phòng">
-            </div>
-        </div>
+
 
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        Made with <span>♥</span> for MisThy's Vườn Mít
+        Project by Vườn Mít - FC MisThy
     </footer>
 
+    <script>
+        function switchSubGroup(id, btn) {
+            // Get the current group card
+            const card = btn.closest('.group-card');
+            
+            // Remove active class from all buttons in this card
+            card.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            // Hide all sub-contents in this card
+            card.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+            
+            // Show the selected sub-content
+            const content = card.querySelector('#' + id);
+            if (content) {
+                content.classList.add('active');
+            }
+        }
+    </script>
+
 </body>
+
 </html>
